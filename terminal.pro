@@ -24,6 +24,7 @@ SOURCES += \
 HEADERS += \
     homewindow.h \
     navigationbar.h \
+    style.h \
     topbar.h
 
 TRANSLATIONS += \
@@ -36,3 +37,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     res.qrc
+
+DISTFILES +=

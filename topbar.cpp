@@ -1,4 +1,5 @@
 #include "topbar.h"
+#include "style.h"
 #include <QDebug>
 
 TopBar::TopBar(QWidget *parent)
@@ -11,6 +12,8 @@ TopBar::TopBar(QWidget *parent)
 
 TopBar::~TopBar()
 {
+    delete setting;
+    delete title;
     delete icon;
 }
 
@@ -34,8 +37,5 @@ void TopBar::setupUi()
                          geometry().height());
     setting->setIcon(icon_setting);
     setting->setIconSize(QSize(geometry().height(), geometry().height()));
-    setting->setStyleSheet(
-                "QPushButton {background-color: #e3e3e3; border-radius: 8px;}"
-                "QPushButton:pressed {background-color: #c6c6c6; border-radius: 8px;}"
-                );
+    setting->setStyleSheet(PUSH_BUTTON_STYLE);
 }
