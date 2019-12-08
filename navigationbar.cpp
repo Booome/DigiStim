@@ -8,3 +8,7 @@ NavigationBar::NavigationBar(QWidget *parent)
 NavigationBar::~NavigationBar()
 {
 }
+
+void NavigationBar::setupUi()
+{
+}

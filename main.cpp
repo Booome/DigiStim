@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QSplashScreen>
 #include <QTimer>
+#include <QScreen>
 
 #include "homewindow.h"
 
@@ -14,6 +15,8 @@ int main(int argc, char *argv[])
     splash->show();
 
     HomeWindow w;
+    w.setGeometry(QGuiApplication::primaryScreen()->geometry());
+    w.setupUi();
 
     QTimer::singleShot(2500, splash, SLOT(close()));
     QTimer::singleShot(2500, &w, SLOT(show()));

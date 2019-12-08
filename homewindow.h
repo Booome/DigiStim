@@ -12,6 +12,8 @@ public:
     explicit HomeWindow(QWidget *parent = nullptr);
     ~HomeWindow();
 
+    void setupUi();
+
 private:
     TopBar *topBar;
     NavigationBar *navigationBar;
