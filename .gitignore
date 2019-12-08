@@ -1,0 +1,13 @@
+.qmake.stash
+
+Makefile
+
+*.o
+
+moc*
+
+qrc_*
+
+terminal
+
+terminal.pro.user
