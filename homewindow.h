@@ -15,12 +15,16 @@ public:
     void setupUi();
 
 private:
+    void resizeEvent(QResizeEvent *event);
+
+private:
     TopBar *topBar;
     NavigationBar *navigationBar;
 
 signals:
 
 public slots:
+
 };
 
 #endif // HOMEWINDOW_H

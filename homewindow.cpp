@@ -33,3 +33,9 @@ void HomeWindow::setupUi()
     navigationBar->setStyleSheet(NAVI_BAR_STYLESHEET);
     navigationBar->setupUi();
 }
+
+void HomeWindow::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+    setupUi();
+}
