@@ -1,13 +1,23 @@
 #include "myapplication.h"
 #include <QDebug>
+#include <QScreen>
+#include <QTimer>
 
 MyApplication::MyApplication(int &argc, char **argv)
     : QApplication(argc, argv)
+    , splash(new QSplashScreen)
+    , home(NULL)
 {
+    splash->setPixmap(QPixmap(":/start.png"));
+    splash->show();
+
+    QTimer::singleShot(2500, this, SLOT(splashDone()));
 }
 
 MyApplication::~MyApplication()
 {
+    delete home;
+    delete splash;
 }
 
 bool MyApplication::eventFilter(QObject *watched, QEvent *event)
@@ -20,4 +30,16 @@ bool MyApplication::eventFilter(QObject *watched, QEvent *event)
                  << event->type();
 
     return QApplication::eventFilter(watched, event);
+}
+
+void MyApplication::splashDone()
+{
+    splash->close();
+    delete splash;
+    splash = nullptr;
+
+    home = new HomeWindow;
+    home->setGeometry(QGuiApplication::primaryScreen()->geometry());
+    home->setupUi();
+    home->show();
 }
