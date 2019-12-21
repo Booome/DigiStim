@@ -3,6 +3,7 @@
 
 #include <QApplication>
 #include <QSplashScreen>
+#include <QTimer>
 #include <homewindow.h>
 
 class MyApplication : public QApplication
@@ -18,10 +19,12 @@ public:
 
 public slots:
     void splashDone();
+    void calibrationModeToggle();
 
 private:
     QSplashScreen *splash;
     HomeWindow    *home;
+    QTimer        *calibration_mode_timer;
 };
 
 #endif // MYAPPLICATION_H
