@@ -5,6 +5,7 @@
 #include <QSplashScreen>
 #include <QTimer>
 #include <homewindow.h>
+#include <calibratewindow.h>
 
 class MyApplication : public QApplication
 {
@@ -19,15 +20,18 @@ public:
 
 public slots:
     void splashDone();
-    void calibrationModeToggle();
+    void calibrateModeToggle();
 
 private:
-    void calibrationCheck(QObject *watched, QEvent *event);
+    void calibrateCheck(QObject *watched, QEvent *event);
+    void enterCalibrateMode();
+    void exitCalibrateMode();
 
 private:
-    QSplashScreen *splash;
-    HomeWindow    *home;
-    QTimer        *calibration_mode_timer;
+    QSplashScreen   *splash;
+    HomeWindow      *home_window;
+    CalibrateWindow *calibrate_window;
+    QTimer          *calibration_mode_timer;
 };
 
 #endif // MYAPPLICATION_H
