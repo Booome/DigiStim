@@ -22,6 +22,9 @@ public slots:
     void calibrationModeToggle();
 
 private:
+    void calibrationCheck(QObject *watched, QEvent *event);
+
+private:
     QSplashScreen *splash;
     HomeWindow    *home;
     QTimer        *calibration_mode_timer;

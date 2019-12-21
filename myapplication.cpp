@@ -26,14 +26,7 @@ MyApplication::~MyApplication()
 
 bool MyApplication::eventFilter(QObject *watched, QEvent *event)
 {
-    if (event->type() == QEvent::MouseButtonPress) {
-        calibration_mode_timer->stop();
-        calibration_mode_timer->setInterval(5000);
-        calibration_mode_timer->start();
-    } else if (event->type() == QEvent::MouseButtonRelease) {
-        calibration_mode_timer->stop();
-    }
-
+    calibrationCheck(watched, event);
     return QApplication::eventFilter(watched, event);
 }
 
@@ -55,5 +48,18 @@ void MyApplication::calibrationModeToggle()
         qDebug() << "Enter Calibration Mode";
     } else {
         qDebug() << "Exit Calibration Mode";
+    }
+}
+
+void MyApplication::calibrationCheck(QObject *watched, QEvent *event)
+{
+    Q_UNUSED(watched);
+
+    if (event->type() == QEvent::MouseButtonPress) {
+        calibration_mode_timer->stop();
+        calibration_mode_timer->setInterval(5000);
+        calibration_mode_timer->start();
+    } else if (event->type() == QEvent::MouseButtonRelease) {
+        calibration_mode_timer->stop();
     }
 }
