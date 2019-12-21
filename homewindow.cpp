@@ -34,12 +34,6 @@ void HomeWindow::setupUi()
     navigationBar->setupUi();
 }
 
-bool HomeWindow::event(QEvent *event)
-{
-    qDebug() << "Hello World.";
-    return QMainWindow::event(event);
-}
-
 void HomeWindow::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event);

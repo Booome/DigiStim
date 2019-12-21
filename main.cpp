@@ -1,4 +1,4 @@
-#include <QApplication>
+#include "myapplication.h"
 #include <QDebug>
 #include <QSplashScreen>
 #include <QTimer>
@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    MyApplication app(argc, argv);
 
     QSplashScreen *splash = new QSplashScreen;
     splash->setPixmap(QPixmap(":/start.png"));
@@ -21,5 +21,6 @@ int main(int argc, char *argv[])
     QTimer::singleShot(2500, splash, SLOT(close()));
     QTimer::singleShot(2500, &w, SLOT(show()));
 
+    app.installEventFilter(&app);
     return app.exec();
 }

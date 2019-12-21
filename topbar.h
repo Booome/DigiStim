@@ -14,8 +14,8 @@ public:
     void setupUi();
 
 private:
-    QLabel *icon;
-    QLabel *title;
+    QLabel      *icon;
+    QLabel      *title;
     QPushButton *setting;
 };
 

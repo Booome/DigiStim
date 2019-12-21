@@ -18,11 +18,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     homewindow.cpp \
     main.cpp \
+    myapplication.cpp \
     navigationbar.cpp \
     topbar.cpp
 
 HEADERS += \
     homewindow.h \
+    myapplication.h \
     navigationbar.h \
     style.h \
     topbar.h

@@ -13,19 +13,13 @@ public:
     ~HomeWindow();
 
     void setupUi();
-    bool event(QEvent *event);
 
 private:
     void resizeEvent(QResizeEvent *event);
 
 private:
-    TopBar *topBar;
+    TopBar        *topBar;
     NavigationBar *navigationBar;
-
-signals:
-
-public slots:
-
 };
 
 #endif // HOMEWINDOW_H
