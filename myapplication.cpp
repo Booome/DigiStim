@@ -72,6 +72,7 @@ void MyApplication::calibrateCheck(QObject *watched, QEvent *event)
 void MyApplication::enterCalibrateMode()
 {
     calibrate_window = new CalibrateWindow;
+    QObject::connect(calibrate_window, SIGNAL(isDone()), this, SLOT(calibrateDone()));
     calibrate_window->setGeometry(QGuiApplication::primaryScreen()->geometry());
     calibrate_window->setupUi();
     calibrate_window->show();
@@ -79,6 +80,13 @@ void MyApplication::enterCalibrateMode()
 
 void MyApplication::exitCalibrateMode()
 {
+    QObject::disconnect(calibrate_window, SIGNAL(isDone()), this, SLOT(calibrateDone()));
     delete calibrate_window;
     calibrate_window = nullptr;
+}
+
+void MyApplication::calibrateDone()
+{
+    home_window->show();
+    exitCalibrateMode();
 }

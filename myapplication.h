@@ -27,6 +27,9 @@ private:
     void enterCalibrateMode();
     void exitCalibrateMode();
 
+private slots:
+    void calibrateDone();
+
 private:
     QSplashScreen   *splash;
     HomeWindow      *home_window;
