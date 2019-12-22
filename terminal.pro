@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     calibratethread.cpp \
     calibratewindow.cpp \
+    crosshair.cpp \
     homewindow.cpp \
     main.cpp \
     myapplication.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 HEADERS += \
     calibratethread.h \
     calibratewindow.h \
+    crosshair.h \
     homewindow.h \
     myapplication.h \
     navigationbar.h \

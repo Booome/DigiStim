@@ -15,9 +15,7 @@ void CalibrateThread::run()
 {
     qDebug() << __PRETTY_FUNCTION__;
 
-    QElapsedTimer timer;
-    timer.start();
-    while (timer.elapsed() < 5000);
+    while (1);
 
     emit isDone();
 }
