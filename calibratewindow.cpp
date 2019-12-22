@@ -24,8 +24,8 @@ CalibrateWindow::~CalibrateWindow()
 {
     QObject::disconnect(thread, SIGNAL(isDone()), this, SIGNAL(isDone()));
 
-    delete[] crosshairs;
     delete thread;
+    delete[] crosshairs;
     delete prompt;
     delete title;
 }

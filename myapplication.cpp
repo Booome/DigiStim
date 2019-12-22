@@ -45,6 +45,8 @@ void MyApplication::splashDone()
 
 void MyApplication::calibrateModeToggle()
 {
+    qDebug() << __PRETTY_FUNCTION__;
+
     calibration_mode_timer->stop();
 
     if (!home_window->isHidden()) {
