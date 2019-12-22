@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QEvent>
+#include <QLabel>
 #include "calibratethread.h"
 
 class CalibrateWindow : public QMainWindow
@@ -22,6 +23,8 @@ signals:
     void isDone();
 
 private:
+    QLabel          *title;
+    QLabel          *prompt;
     CalibrateThread *thread;
 };
 

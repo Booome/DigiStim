@@ -17,7 +17,7 @@ void CalibrateThread::run()
 
     QElapsedTimer timer;
     timer.start();
-    while (timer.elapsed() < 2000);
+    while (timer.elapsed() < 5000);
 
     emit isDone();
 }
