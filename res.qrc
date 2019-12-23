@@ -6,5 +6,6 @@
         <file>setting.png</file>
         <file>home.png</file>
         <file>back.png</file>
+        <file>reset.png</file>
     </qresource>
 </RCC>

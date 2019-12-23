@@ -6,6 +6,7 @@ TopBar::TopBar(QWidget *parent)
     : QWidget(parent)
     , icon(new QLabel(this))
     , title(new QLabel(this))
+    , reset(new QPushButton(this))
     , setting(new QPushButton(this))
 {
 }
@@ -13,6 +14,7 @@ TopBar::TopBar(QWidget *parent)
 TopBar::~TopBar()
 {
     delete setting;
+    delete reset;
     delete title;
     delete icon;
 }
@@ -30,6 +32,14 @@ void TopBar::setupUi()
     title->setText(tr("Terminal"));
     title->setAlignment(Qt::AlignVCenter);
     title->setStyleSheet("font: 75 26pt \"Adobe Courier\";");
+
+    QIcon icon_reset(":/reset.png");
+    reset->setGeometry(geometry().width() - geometry().height() * 2.5, 0,
+                       geometry().height(),
+                       geometry().height());
+    reset->setIcon(icon_reset);
+    reset->setIconSize(QSize(geometry().height(), geometry().height()));
+    reset->setStyleSheet(PUSH_BUTTON_STYLE);
 
     QIcon icon_setting(":/setting.png");
     setting->setGeometry(geometry().width() - geometry().height(), 0,
