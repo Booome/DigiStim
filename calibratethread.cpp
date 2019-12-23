@@ -1,7 +1,5 @@
 #include "calibratethread.h"
 #include <QDebug>
-#include <QElapsedTimer>
-#include <QDateTime>
 
 CalibrateThread::CalibrateThread(QObject *parent)
     : QThread(parent)
