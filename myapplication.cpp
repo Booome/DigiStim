@@ -15,7 +15,10 @@ MyApplication::MyApplication(int &argc, char **argv)
     QTimer::singleShot(2500, this, SLOT(splashDone()));
 
     calibration_mode_timer->setSingleShot(true);
+    calibration_mode_timer->setInterval(5000);
     connect(calibration_mode_timer, SIGNAL(timeout()), this, SLOT(calibrateModeToggle()));
+
+    installEventFilter(this);
 }
 
 MyApplication::~MyApplication()
@@ -38,8 +41,7 @@ void MyApplication::splashDone()
     splash = nullptr;
 
     home_window = new HomeWindow;
-    home_window->setGeometry(QGuiApplication::primaryScreen()->geometry());
-    home_window->setupUi();
+    home_window->setupUi(QGuiApplication::primaryScreen()->geometry());
     home_window->show();
 }
 
@@ -64,7 +66,6 @@ void MyApplication::calibrateCheck(QObject *watched, QEvent *event)
 
     if (event->type() == QEvent::MouseButtonPress) {
         calibration_mode_timer->stop();
-        calibration_mode_timer->setInterval(5000);
         calibration_mode_timer->start();
     } else if (event->type() == QEvent::MouseButtonRelease) {
         calibration_mode_timer->stop();
@@ -75,8 +76,7 @@ void MyApplication::enterCalibrateMode()
 {
     calibrate_window = new CalibrateWindow;
     QObject::connect(calibrate_window, SIGNAL(isDone()), this, SLOT(calibrateDone()));
-    calibrate_window->setGeometry(QGuiApplication::primaryScreen()->geometry());
-    calibrate_window->setupUi();
+    calibrate_window->setupUi(QGuiApplication::primaryScreen()->geometry());
     calibrate_window->show();
 }
 

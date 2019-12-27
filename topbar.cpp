@@ -19,8 +19,10 @@ TopBar::~TopBar()
     delete icon;
 }
 
-void TopBar::setupUi()
+void TopBar::setupUi(const QRect &rect)
 {
+    setGeometry(rect);
+
     QPixmap pixmap_icon(":/icon.png");
     icon->setGeometry(0, 0, geometry().height(), geometry().height());
     icon->setPixmap(pixmap_icon);

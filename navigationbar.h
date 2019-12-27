@@ -10,7 +10,7 @@ public:
     explicit NavigationBar(QWidget *parent = nullptr);
     ~NavigationBar();
 
-    void setupUi();
+    void setupUi(const QRect &rect);
 
 private:
     QPushButton *home;

@@ -11,7 +11,7 @@ public:
     explicit TopBar(QWidget *parent = nullptr);
     ~TopBar();
 
-    void setupUi();
+    void setupUi(const QRect &rect);
 
 private:
     QLabel      *icon;

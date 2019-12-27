@@ -14,8 +14,10 @@ NavigationBar::~NavigationBar()
     delete home;
 }
 
-void NavigationBar::setupUi()
+void NavigationBar::setupUi(const QRect &rect)
 {
+    setGeometry(rect);
+
     QIcon icon_back(":/back.png");
     back->setGeometry(0, 0, geometry().height(), geometry().height());
     back->setIcon(icon_back);

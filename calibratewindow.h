@@ -16,7 +16,7 @@ public:
     explicit CalibrateWindow(QWidget *parent = nullptr);
     ~CalibrateWindow();
 
-    void setupUi();
+    void setupUi(const QRect &rect);
 
 private:
     void resizeEvent(QResizeEvent *event);

@@ -30,8 +30,9 @@ CalibrateWindow::~CalibrateWindow()
     delete title;
 }
 
-void CalibrateWindow::setupUi()
+void CalibrateWindow::setupUi(const QRect &rect)
 {
+    setGeometry(rect);
     setupTitle();
     setupPrompt();
     setupCrosshairs();
@@ -74,14 +75,12 @@ void CalibrateWindow::setupCrosshairs()
         {geometry().width() / 2 - HSIDE, geometry().height() / 2 - HSIDE, SIDE, SIDE},
     };
 
-    for (int i = 0; i < 5; ++i) {
-        crosshairs[i].setGeometry(geometries[i]);
-        crosshairs[i].setupUi();
-    }
+    for (int i = 0; i < 5; ++i)
+        crosshairs[i].setupUi(geometries[i]);
 }
 
 void CalibrateWindow::resizeEvent(QResizeEvent *event)
 {
-    Q_UNUSED(event);
-    setupUi();
+    Q_UNUSED(event)
+    setupUi(geometry());
 }

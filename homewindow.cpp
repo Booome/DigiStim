@@ -17,25 +17,25 @@ HomeWindow::~HomeWindow()
     delete topBar;
 }
 
-void HomeWindow::setupUi()
+void HomeWindow::setupUi(const QRect &rect)
 {
-    topBar->setGeometry(GAPS_PIXES,
-                        GAPS_PIXES,
-                        geometry().width() - GAPS_PIXES * 2,
-                        BAR_HEIGHT_PIXES);
-    topBar->setStyleSheet(TOP_BAR_STYLESHEET);
-    topBar->setupUi();
+    setGeometry(rect);
 
-    navigationBar->setGeometry(GAPS_PIXES,
-                               BAR_HEIGHT_PIXES + GAPS_PIXES * 2,
-                               geometry().width() - GAPS_PIXES * 2,
-                               BAR_HEIGHT_PIXES);
+    topBar->setupUi(QRect(GAPS_PIXES,
+                          GAPS_PIXES,
+                          geometry().width() - GAPS_PIXES * 2,
+                          BAR_HEIGHT_PIXES));
+    topBar->setStyleSheet(TOP_BAR_STYLESHEET);
+
+    navigationBar->setupUi(QRect(GAPS_PIXES,
+                                 BAR_HEIGHT_PIXES + GAPS_PIXES * 2,
+                                 geometry().width() - GAPS_PIXES * 2,
+                                 BAR_HEIGHT_PIXES ));
     navigationBar->setStyleSheet(NAVI_BAR_STYLESHEET);
-    navigationBar->setupUi();
 }
 
 void HomeWindow::resizeEvent(QResizeEvent *event)
 {
-    Q_UNUSED(event);
-    setupUi();
+    Q_UNUSED(event)
+    setupUi(geometry());
 }

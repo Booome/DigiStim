@@ -12,7 +12,7 @@ public:
     explicit HomeWindow(QWidget *parent = nullptr);
     ~HomeWindow();
 
-    void setupUi();
+    void setupUi(const QRect &rect);
 
 private:
     void resizeEvent(QResizeEvent *event);

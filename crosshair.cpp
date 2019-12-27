@@ -12,8 +12,10 @@ Crosshair::~Crosshair()
     delete label;
 }
 
-void Crosshair::setupUi()
+void Crosshair::setupUi(const QRect &rect)
 {
+    setGeometry(rect);
+
     QPixmap pixmap(geometry().width(), geometry().height());
     pixmap.fill(Qt::transparent);
     QPainter painter(&pixmap);

@@ -21,6 +21,7 @@ SOURCES += \
     crosshair.cpp \
     homewindow.cpp \
     main.cpp \
+    mainview.cpp \
     myapplication.cpp \
     navigationbar.cpp \
     topbar.cpp
@@ -30,6 +31,7 @@ HEADERS += \
     calibratewindow.h \
     crosshair.h \
     homewindow.h \
+    mainview.h \
     myapplication.h \
     navigationbar.h \
     style.h \

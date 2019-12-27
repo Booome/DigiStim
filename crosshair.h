@@ -11,7 +11,7 @@ public:
     explicit Crosshair(QWidget *parent = nullptr);
     ~Crosshair();
 
-    void setupUi();
+    void setupUi(const QRect &rect);
 
 private:
     QLabel *label;
