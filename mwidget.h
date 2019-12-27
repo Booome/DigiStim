@@ -5,10 +5,9 @@
 
 class MWidget : public QWidget
 {
-    Q_OBJECT
 public:
-    explicit MWidget(QWidget *parent = nullptr): QWidget(parent) {}
-    virtual ~MWidget() {}
+    explicit MWidget(QWidget *parent = nullptr);
+    virtual ~MWidget();
 
     virtual void setupUi(const QRect &rect) = 0;
 };

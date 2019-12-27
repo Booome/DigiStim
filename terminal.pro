@@ -22,6 +22,7 @@ SOURCES += \
     homewindow.cpp \
     main.cpp \
     mainview.cpp \
+    mwidget.cpp \
     myapplication.cpp \
     navigationbar.cpp \
     topbar.cpp
