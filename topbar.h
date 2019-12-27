@@ -1,17 +1,17 @@
 #ifndef TOPBAR_H
 #define TOPBAR_H
 
-#include <QWidget>
+#include "mwidget.h"
 #include <QLabel>
 #include <QPushButton>
 
-class TopBar: public QWidget
+class TopBar: public MWidget
 {
 public:
     explicit TopBar(QWidget *parent = nullptr);
-    ~TopBar();
+    virtual ~TopBar();
 
-    void setupUi(const QRect &rect);
+    virtual void setupUi(const QRect &rect);
 
 private:
     QLabel      *icon;

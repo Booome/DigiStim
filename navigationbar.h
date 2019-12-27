@@ -1,16 +1,16 @@
 #ifndef NAVIGATIONBAR_H
 #define NAVIGATIONBAR_H
 
-#include <QWidget>
+#include "mwidget.h"
 #include <QPushButton>
 
-class NavigationBar: public QWidget
+class NavigationBar: public MWidget
 {
 public:
     explicit NavigationBar(QWidget *parent = nullptr);
-    ~NavigationBar();
+    virtual ~NavigationBar();
 
-    void setupUi(const QRect &rect);
+    virtual void setupUi(const QRect &rect);
 
 private:
     QPushButton *home;

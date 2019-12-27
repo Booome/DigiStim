@@ -3,7 +3,7 @@
 #include <QDebug>
 
 NavigationBar::NavigationBar(QWidget *parent)
-    : QWidget(parent)
+    : MWidget(parent)
     , home(new QPushButton(this))
     , back(new QPushButton(this))
 {
@@ -17,6 +17,7 @@ NavigationBar::~NavigationBar()
 void NavigationBar::setupUi(const QRect &rect)
 {
     setGeometry(rect);
+    setStyleSheet(NAVI_BAR_STYLESHEET);
 
     QIcon icon_back(":/back.png");
     back->setGeometry(0, 0, geometry().height(), geometry().height());

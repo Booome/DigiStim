@@ -3,7 +3,7 @@
 #include <QDebug>
 
 TopBar::TopBar(QWidget *parent)
-    : QWidget(parent)
+    : MWidget(parent)
     , icon(new QLabel(this))
     , title(new QLabel(this))
     , reset(new QPushButton(this))
@@ -22,6 +22,7 @@ TopBar::~TopBar()
 void TopBar::setupUi(const QRect &rect)
 {
     setGeometry(rect);
+    setStyleSheet(TOP_BAR_STYLESHEET);
 
     QPixmap pixmap_icon(":/icon.png");
     icon->setGeometry(0, 0, geometry().height(), geometry().height());

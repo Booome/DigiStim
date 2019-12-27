@@ -21,17 +21,18 @@ void HomeWindow::setupUi(const QRect &rect)
 {
     setGeometry(rect);
 
-    topBar->setupUi(QRect(GAPS_PIXES,
-                          GAPS_PIXES,
-                          geometry().width() - GAPS_PIXES * 2,
-                          BAR_HEIGHT_PIXES));
-    topBar->setStyleSheet(TOP_BAR_STYLESHEET);
+    MWidget *widgets[] = {
+        topBar,
+        navigationBar
+    };
 
-    navigationBar->setupUi(QRect(GAPS_PIXES,
-                                 BAR_HEIGHT_PIXES + GAPS_PIXES * 2,
-                                 geometry().width() - GAPS_PIXES * 2,
-                                 BAR_HEIGHT_PIXES ));
-    navigationBar->setStyleSheet(NAVI_BAR_STYLESHEET);
+    const QRect geometries[] = {
+        {GAPS_PIXES, GAPS_PIXES, geometry().width() - GAPS_PIXES * 2, BAR_HEIGHT_PIXES},
+        {GAPS_PIXES, BAR_HEIGHT_PIXES + GAPS_PIXES * 2, geometry().width() - GAPS_PIXES * 2, BAR_HEIGHT_PIXES}
+    };
+
+    for (size_t i = 0; i < sizeof(widgets) / sizeof(widgets[0]); ++i)
+        widgets[i]->setupUi(geometries[i]);
 }
 
 void HomeWindow::resizeEvent(QResizeEvent *event)

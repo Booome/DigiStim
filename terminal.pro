@@ -32,6 +32,7 @@ HEADERS += \
     crosshair.h \
     homewindow.h \
     mainview.h \
+    mwidget.h \
     myapplication.h \
     navigationbar.h \
     style.h \
