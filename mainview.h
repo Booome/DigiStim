@@ -36,7 +36,7 @@ private:
 
     int outter_gaps;
     int inner_gaps;
-    int radius;
+    int button_radius;
 };
 
 #endif // MAINVIEW_H

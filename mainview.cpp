@@ -1,19 +1,20 @@
 #include "mainview.h"
 #include "style.h"
+#include <QDebug>
 
 MainView::MainView(QWidget *parent)
     : MWidget(parent)
     , outter_gaps(10)
     , inner_gaps(5)
-    , radius(20)
+    , button_radius(20)
 {
     setAttribute(Qt::WA_StyledBackground);
 
     for (int i = 0; i < TRIGGER_BUTTON_NUM; ++i)
-        triggers[i] = new QPushButton;
+        triggers[i] = new QPushButton(this);
 
     for (int i = 0; i < CHANNEL_BUTTON_NUM; ++i)
-        channels[i] = new QPushButton;
+        channels[i] = new QPushButton(this);
 }
 
 MainView::~MainView()
@@ -28,7 +29,6 @@ MainView::~MainView()
 void MainView::setupUi(const QRect &rect)
 {
     setGeometry(rect);
-    setStyleSheet(NAVI_BAR_STYLESHEET);
 
     setupTriggers();
     setupChannels();
@@ -42,24 +42,38 @@ void MainView::setupTriggers()
     };
 
     const QString styles[] = {
-        "QPushButton:pressed {background-color: #c6c6c6; border-top-left-radius: " + QString::number(radius) + "px; border-top-right-radius:"  + QString::number(radius) + "px;}",
-        "QPushButton:pressed {background-color: #c6c6c6; border-bottom-left-radius:" + QString::number(radius) + "px; border-bottom-right-radius:" + QString::number(radius) + "px;}"
+        "QPushButton {background-color: #c6c6c6; border-top-left-radius: " + QString::number(button_radius) + "px; border-top-right-radius:"  + QString::number(button_radius) + "px;}",
+        "QPushButton {background-color: #c6c6c6; border-bottom-left-radius:" + QString::number(button_radius) + "px; border-bottom-right-radius:" + QString::number(button_radius) + "px;}"
     };
+
+    for (int i = 0; i < TRIGGER_BUTTON_NUM; ++i) {
+        triggers[i]->setGeometry(geometries[i]);
+        triggers[i]->setStyleSheet(styles[i]);
+        triggers[i]->show();
+    }
 }
 
 void MainView::setupChannels()
 {
     const QRect geometries[] = {
         {geometries_x(1), geometries_y(0), channelButtonWith(), channelButtonHeight()},
-        {geometries_x(0), geometries_y(1), channelButtonWith(), channelButtonHeight()},
-        {geometries_x(0), geometries_y(1), channelButtonWith(), channelButtonHeight()},
-        {geometries_x(0), geometries_y(1), channelButtonWith(), channelButtonHeight()}
+        {geometries_x(1), geometries_y(1), channelButtonWith(), channelButtonHeight()},
+        {geometries_x(2), geometries_y(0), channelButtonWith(), channelButtonHeight()},
+        {geometries_x(2), geometries_y(1), channelButtonWith(), channelButtonHeight()}
     };
 
     const QString styles[] = {
-        "QPushButton:pressed {background-color: #c6c6c6; border-top-left-radius: " + QString::number(radius) + "px; border-top-right-radius:"  + QString::number(radius) + "px;}",
-        "QPushButton:pressed {background-color: #c6c6c6; border-bottom-left-radius:" + QString::number(radius) + "px; border-bottom-right-radius:" + QString::number(radius) + "px;}"
+        "QPushButton {background-color: #c6c6c6; border-top-left-radius: " + QString::number(button_radius) + "px;}",
+        "QPushButton {background-color: #c6c6c6; border-bottom-left-radius: " + QString::number(button_radius) + "px;}",
+        "QPushButton {background-color: #c6c6c6; border-top-right-radius: " + QString::number(button_radius) + "px;}",
+        "QPushButton {background-color: #c6c6c6; border-bottom-right-radius: " + QString::number(button_radius) + "px;}",
     };
+
+    for (int i = 0; i < CHANNEL_BUTTON_NUM; ++i) {
+        channels[i]->setGeometry(geometries[i]);
+        channels[i]->setStyleSheet(styles[i]);
+        channels[i]->show();
+    }
 }
 
 int MainView::triggerButtonWith()
