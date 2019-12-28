@@ -199,9 +199,9 @@ void ofSerial::buildDeviceList()
     prefixMatch.push_back("tty.");
 #endif
 #ifdef TARGET_LINUX
-    prefixMatch.push_back("ttyS");
+//    prefixMatch.push_back("ttyS");
     prefixMatch.push_back("ttyUSB");
-    prefixMatch.push_back("rfc");
+//    prefixMatch.push_back("rfc");
     prefixMatch.push_back("ttyA");
 #endif
 

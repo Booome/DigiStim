@@ -1,6 +1,7 @@
 #include "topbar.h"
 #include "style.h"
 #include "database.h"
+#include "ofSerial.h"
 #include <QDebug>
 
 TopBar::TopBar(QWidget *parent)
@@ -13,6 +14,11 @@ TopBar::TopBar(QWidget *parent)
     , setting(new QPushButton(this))
 {
     setAttribute(Qt::WA_StyledBackground);
+
+    ofSerial serial;
+    vector<ofSerialDeviceInfo> devices = serial.getDeviceList();
+    if (devices.size())
+        DataBase::getInstance()->setDevName(devices[0].getDeviceName().c_str());
 
     QObject::connect(DataBase::getInstance(), SIGNAL(connStateChanged(Digi::ConnectState_t)),
                      this, SLOT(on_connStateChange(Digi::ConnectState_t)));
@@ -98,8 +104,6 @@ void TopBar::on_connStateChange(Digi::ConnectState_t _conn_state)
         filename = ":/handshaking.png";
     else if (_conn_state == Digi::ConnectState_Connected)
         filename = ":/connected.png";
-
-    qDebug() << filename;
 
     QPixmap pixmap(filename);
     conn_state->setGeometry(geometry().width() / 2 - geometry().height(), 0,
