@@ -16,31 +16,34 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    calibratethread.cpp \
-    calibratewindow.cpp \
-    crosshair.cpp \
-    homewindow.cpp \
     main.cpp \
-    mainview.cpp \
-    mwidget.cpp \
-    myapplication.cpp \
-    navigationbar.cpp \
-    topbar.cpp
+    GUI/calibratethread.cpp \
+    GUI/calibratewindow.cpp \
+    GUI/crosshair.cpp \
+    GUI/homewindow.cpp \
+    GUI/mainview.cpp \
+    GUI/mwidget.cpp \
+    GUI/myapplication.cpp \
+    GUI/navigationbar.cpp \
+    GUI/topbar.cpp
+
+INCLUDEPATH += \
+    GUI
 
 HEADERS += \
-    calibratethread.h \
-    calibratewindow.h \
-    crosshair.h \
-    homewindow.h \
-    mainview.h \
-    mwidget.h \
-    myapplication.h \
-    navigationbar.h \
-    style.h \
-    topbar.h
+    GUI/calibratethread.h \
+    GUI/calibratewindow.h \
+    GUI/crosshair.h \
+    GUI/homewindow.h \
+    GUI/mainview.h \
+    GUI/mwidget.h \
+    GUI/myapplication.h \
+    GUI/navigationbar.h \
+    GUI/style.h \
+    GUI/topbar.h
 
 TRANSLATIONS += \
-    zh_CN.ts
+    GUI/zh_CN.ts
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -48,6 +51,14 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    res.qrc
+    GUI/res.qrc
 
-DISTFILES +=
+DISTFILES += \
+    GUI/back.png \
+    GUI/home.png \
+    GUI/icon.png \
+    GUI/reset.png \
+    GUI/setting.png \
+    GUI/start.png \
+    GUI/zh_CN.qm \
+    GUI/zh_CN.ts
