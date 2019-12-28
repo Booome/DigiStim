@@ -19,11 +19,13 @@ SOURCES += \
     GUI/calibratethread.cpp \
     GUI/calibratewindow.cpp \
     GUI/crosshair.cpp \
+    GUI/database.cpp \
     GUI/homewindow.cpp \
     GUI/mainview.cpp \
     GUI/mwidget.cpp \
     GUI/myapplication.cpp \
     GUI/navigationbar.cpp \
+    GUI/pulsepalhost.cpp \
     GUI/topbar.cpp \
     PulsePal/PulsePal.cpp \
     PulsePal/ofSerial.cpp \
@@ -37,11 +39,13 @@ HEADERS += \
     GUI/calibratethread.h \
     GUI/calibratewindow.h \
     GUI/crosshair.h \
+    GUI/database.h \
     GUI/homewindow.h \
     GUI/mainview.h \
     GUI/mwidget.h \
     GUI/myapplication.h \
     GUI/navigationbar.h \
+    GUI/pulsepalhost.h \
     GUI/style.h \
     GUI/topbar.h \
     PulsePal/PulsePal.h \
@@ -57,10 +61,15 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    GUI/res.qrc \
+    GUI/res.qrc \
     GUI/res.qrc
 
 DISTFILES += \
     GUI/back.png \
+    GUI/connected.png \
+    GUI/disconnected.png \
+    GUI/handshaking.png \
     GUI/home.png \
     GUI/icon.png \
     GUI/reset.png \

@@ -32,7 +32,6 @@ private slots:
 
 private:
     QSplashScreen   *splash;
-    HomeWindow      *home_window;
     CalibrateWindow *calibrate_window;
     QTimer          *calibration_mode_timer;
 };

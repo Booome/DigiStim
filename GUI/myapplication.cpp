@@ -5,7 +5,6 @@
 MyApplication::MyApplication(int &argc, char **argv)
     : QApplication(argc, argv)
     , splash(new QSplashScreen)
-    , home_window(HomeWindow::getInstance())
     , calibrate_window(NULL)
     , calibration_mode_timer(new QTimer(this))
 {
@@ -39,6 +38,7 @@ void MyApplication::splashDone()
     delete splash;
     splash = nullptr;
 
+    HomeWindow *home_window = HomeWindow::getInstance();
     home_window->setupUi(QGuiApplication::primaryScreen()->geometry());
     home_window->show();
 }
@@ -49,6 +49,7 @@ void MyApplication::calibrateModeToggle()
 
     calibration_mode_timer->stop();
 
+    HomeWindow *home_window = HomeWindow::getInstance();
     if (!home_window->isHidden()) {
         enterCalibrateMode();
         home_window->hide();
@@ -87,6 +88,7 @@ void MyApplication::exitCalibrateMode()
 
 void MyApplication::calibrateDone()
 {
+    HomeWindow *home_window = HomeWindow::getInstance();
     home_window->show();
     exitCalibrateMode();
 }
