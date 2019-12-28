@@ -16,7 +16,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp \
     GUI/calibratethread.cpp \
     GUI/calibratewindow.cpp \
     GUI/crosshair.cpp \
@@ -25,7 +24,10 @@ SOURCES += \
     GUI/mwidget.cpp \
     GUI/myapplication.cpp \
     GUI/navigationbar.cpp \
-    GUI/topbar.cpp
+    GUI/topbar.cpp \
+    PulsePal/PulsePal.cpp \
+    PulsePal/ofSerial.cpp \
+    main.cpp
 
 INCLUDEPATH += \
     GUI
@@ -40,7 +42,10 @@ HEADERS += \
     GUI/myapplication.h \
     GUI/navigationbar.h \
     GUI/style.h \
-    GUI/topbar.h
+    GUI/topbar.h \
+    PulsePal/PulsePal.h \
+    PulsePal/ofConstants.h \
+    PulsePal/ofSerial.h
 
 TRANSLATIONS += \
     GUI/zh_CN.ts
