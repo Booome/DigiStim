@@ -8,6 +8,7 @@ TopBar::TopBar(QWidget *parent)
     , icon(new QLabel(this))
     , title(new QLabel(this))
     , conn_state(new QLabel(this))
+    , dev_name(new QPushButton(this))
     , reset(new QPushButton(this))
     , setting(new QPushButton(this))
 {
