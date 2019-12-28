@@ -14,7 +14,8 @@ TopBar::TopBar(QWidget *parent)
 {
     setAttribute(Qt::WA_StyledBackground);
 
-    QObject::connect(DataBase::getInstance(), SIGNAL(connStateChanged), this, SLOT(on_connStateChange(Digi::ConnectState_t)));
+    QObject::connect(DataBase::getInstance(), SIGNAL(connStateChanged(Digi::ConnectState_t)),
+                     this, SLOT(on_connStateChange(Digi::ConnectState_t)));
 }
 
 TopBar::~TopBar()
@@ -33,6 +34,7 @@ void TopBar::setupUi(const QRect &rect)
     setupIcon();
     setupTitle();
     setupConnState();
+    setupDevName();
     setupReset();
     setupSetting();
 }
@@ -57,8 +59,12 @@ void TopBar::setupTitle()
 
 void TopBar::setupConnState()
 {
-    Digi::ConnectState_t _conn_state = DataBase::getInstance()->getConnState();
-    on_connStateChange(_conn_state);
+    on_connStateChange(DataBase::getInstance()->getConnState());
+}
+
+void TopBar::setupDevName()
+{
+    on_devNameChange(DataBase::getInstance()->getDevName());
 }
 
 void TopBar::setupReset()
@@ -100,4 +106,15 @@ void TopBar::on_connStateChange(Digi::ConnectState_t _conn_state)
                             geometry().height(), geometry().height());
     conn_state->setPixmap(pixmap);
     conn_state->setAlignment(Qt::AlignCenter);
+}
+
+void TopBar::on_devNameChange(const QString &dev)
+{
+    dev_name->setGeometry(geometry().width() / 2, 0,
+                          geometry().width() / 2 - geometry().height() * 2.5,
+                          geometry().height());
+    dev_name->setText(dev);
+    dev_name->setFont(QFont("Adobe Courier", 20));
+    dev_name->setStyleSheet("QPushButton {background-color: #F0F0F0; border-radius: 8px;}"
+                            "QPushButton:pressed {background-color: #C6C6C6; border-radius: 8px;}");
 }

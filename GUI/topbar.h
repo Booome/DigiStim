@@ -20,11 +20,13 @@ private:
     void setupIcon();
     void setupTitle();
     void setupConnState();
+    void setupDevName();
     void setupReset();
     void setupSetting();
 
 public slots:
     void on_connStateChange(Digi::ConnectState_t);
+    void on_devNameChange(const QString &dev);
 
 private:
     QLabel      *icon;
