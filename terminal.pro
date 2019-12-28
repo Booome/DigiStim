@@ -40,6 +40,7 @@ HEADERS += \
     GUI/calibratewindow.h \
     GUI/crosshair.h \
     GUI/database.h \
+    GUI/diginamespace.h \
     GUI/homewindow.h \
     GUI/mainview.h \
     GUI/mwidget.h \

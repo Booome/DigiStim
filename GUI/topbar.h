@@ -16,6 +16,13 @@ public:
     virtual void setupUi(const QRect &rect);
 
 private:
+    void setupIcon();
+    void setupTitle();
+    void setupConnState();
+    void setupReset();
+    void setupSetting();
+
+private:
     QLabel      *icon;
     QLabel      *title;
     QLabel      *conn_state;
