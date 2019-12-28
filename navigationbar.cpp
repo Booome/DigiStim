@@ -7,6 +7,7 @@ NavigationBar::NavigationBar(QWidget *parent)
     , home(new QPushButton(this))
     , back(new QPushButton(this))
 {
+    setAttribute(Qt::WA_StyledBackground);
 }
 
 NavigationBar::~NavigationBar()

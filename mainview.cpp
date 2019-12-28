@@ -1,11 +1,14 @@
 #include "mainview.h"
+#include "style.h"
 
 MainView::MainView(QWidget *parent)
-    : QWidget(parent)
+    : MWidget(parent)
     , outter_gaps(10)
     , inner_gaps(5)
     , radius(20)
 {
+    setAttribute(Qt::WA_StyledBackground);
+
     for (int i = 0; i < TRIGGER_BUTTON_NUM; ++i)
         triggers[i] = new QPushButton;
 
@@ -25,6 +28,7 @@ MainView::~MainView()
 void MainView::setupUi(const QRect &rect)
 {
     setGeometry(rect);
+    setStyleSheet(NAVI_BAR_STYLESHEET);
 
     setupTriggers();
     setupChannels();

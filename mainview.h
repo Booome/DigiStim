@@ -2,15 +2,16 @@
 #define MAINVIEW_H
 
 #include <QObject>
-#include <QWidget>
+#include "mwidget.h"
 #include <QPushButton>
 
 #define TRIGGER_BUTTON_NUM      2
 #define CHANNEL_BUTTON_NUM      4
 
-class MainView : public QWidget
+class MainView : public MWidget
 {
     Q_OBJECT
+
 public:
     explicit MainView(QWidget *parent = nullptr);
     ~MainView();

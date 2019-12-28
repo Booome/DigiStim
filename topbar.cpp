@@ -9,6 +9,7 @@ TopBar::TopBar(QWidget *parent)
     , reset(new QPushButton(this))
     , setting(new QPushButton(this))
 {
+    setAttribute(Qt::WA_StyledBackground);
 }
 
 TopBar::~TopBar()

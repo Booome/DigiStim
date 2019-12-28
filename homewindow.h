@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "topbar.h"
 #include "navigationbar.h"
+#include "mwidget.h"
 
 class HomeWindow : public QMainWindow
 {
@@ -17,9 +18,15 @@ public:
 private:
     void resizeEvent(QResizeEvent *event);
 
+    int geometries_x(int column);
+    int geometries_y(int row);
+    int geometries_w(int column);
+    int geometries_h(int row);
+
 private:
     TopBar        *topBar;
     NavigationBar *navigationBar;
+    MWidget       *view;
 };
 
 #endif // HOMEWINDOW_H

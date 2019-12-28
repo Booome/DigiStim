@@ -6,6 +6,8 @@
 
 class NavigationBar: public MWidget
 {
+    Q_OBJECT
+
 public:
     explicit NavigationBar(QWidget *parent = nullptr);
     virtual ~NavigationBar();

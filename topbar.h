@@ -7,6 +7,8 @@
 
 class TopBar: public MWidget
 {
+    Q_OBJECT
+
 public:
     explicit TopBar(QWidget *parent = nullptr);
     virtual ~TopBar();
