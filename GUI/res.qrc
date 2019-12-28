@@ -6,5 +6,8 @@
         <file>home.png</file>
         <file>back.png</file>
         <file>reset.png</file>
+        <file>connected.png</file>
+        <file>disconnected.png</file>
+        <file>handshaking.png</file>
     </qresource>
 </RCC>

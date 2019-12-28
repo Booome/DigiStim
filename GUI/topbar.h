@@ -18,6 +18,7 @@ public:
 private:
     QLabel      *icon;
     QLabel      *title;
+    QLabel      *conn_state;
     QPushButton *reset;
     QPushButton *setting;
 };

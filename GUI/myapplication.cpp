@@ -5,7 +5,7 @@
 MyApplication::MyApplication(int &argc, char **argv)
     : QApplication(argc, argv)
     , splash(new QSplashScreen)
-    , home_window(NULL)
+    , home_window(HomeWindow::getInstance())
     , calibrate_window(NULL)
     , calibration_mode_timer(new QTimer(this))
 {
@@ -24,7 +24,6 @@ MyApplication::MyApplication(int &argc, char **argv)
 MyApplication::~MyApplication()
 {
     delete calibration_mode_timer;
-    delete home_window;
     delete splash;
 }
 
@@ -40,7 +39,6 @@ void MyApplication::splashDone()
     delete splash;
     splash = nullptr;
 
-    home_window = new HomeWindow;
     home_window->setupUi(QGuiApplication::primaryScreen()->geometry());
     home_window->show();
 }

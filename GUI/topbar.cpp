@@ -6,6 +6,7 @@ TopBar::TopBar(QWidget *parent)
     : MWidget(parent)
     , icon(new QLabel(this))
     , title(new QLabel(this))
+    , conn_state(new QLabel(this))
     , reset(new QPushButton(this))
     , setting(new QPushButton(this))
 {

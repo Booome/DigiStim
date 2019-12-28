@@ -30,7 +30,8 @@ SOURCES += \
     main.cpp
 
 INCLUDEPATH += \
-    GUI
+    GUI \
+    PulsePal
 
 HEADERS += \
     GUI/calibratethread.h \
