@@ -4,6 +4,7 @@
 #include "mwidget.h"
 #include <QLabel>
 #include <QPushButton>
+#include "diginamespace.h"
 
 class TopBar: public MWidget
 {
@@ -22,10 +23,14 @@ private:
     void setupReset();
     void setupSetting();
 
+public slots:
+    void on_connStateChange(Digi::ConnectState_t);
+
 private:
     QLabel      *icon;
     QLabel      *title;
     QLabel      *conn_state;
+    QPushButton *dev_name;
     QPushButton *reset;
     QPushButton *setting;
 };

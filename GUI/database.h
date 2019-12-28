@@ -32,10 +32,12 @@ public:
 
     void setConnState(Digi::ConnectState_t state) {
         conn_state = state;
+        emit connStateChanged(conn_state);
     }
 
     void resetConnState() {
         conn_state = Digi::ConnectState_Disconnected;
+        emit connStateChanged(conn_state);
     }
 
 private:
