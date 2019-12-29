@@ -76,9 +76,7 @@ void PulsePal::setDefaultParameters()
 
 void PulsePal::initialize(std::string portString)
 {
-
     std::cout << "Searching for Pulse Pal..." << std::endl;
-
 
     //
     // lsusb shows Device 104: ID 1eaf:0004
@@ -128,7 +126,6 @@ void PulsePal::initialize(std::string portString)
     } else {
         std::cout << "Error: Could not find a device on port " << portString << "." << std::endl;
     }
-
 }
 
 void PulsePal::end()
@@ -313,7 +310,6 @@ void PulsePal::program(uint8_t channel, uint8_t paramCode, uint8_t paramValue)
     uint8_t message[5] = {213, 74, paramCode, channel, paramValue };
     serial.writeBytes(message, 5);
 }
-
 
 
 void PulsePal::triggerChannel(uint8_t chan)

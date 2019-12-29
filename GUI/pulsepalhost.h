@@ -1,25 +1,29 @@
 #ifndef PULSEPALHOST_H
 #define PULSEPALHOST_H
 
-#include <QObject>
+#include <QThread>
 
-class PulsePalHost : public QObject
+class PulsePalHost : public QThread
 {
     Q_OBJECT
 
-public:
+private:
     explicit PulsePalHost(QObject *parent = nullptr);
     ~PulsePalHost();
 
 public:
     static PulsePalHost *getInstance() {
-        if (!instance)
-            instance = new PulsePalHost;
-        return instance;
+        static PulsePalHost instance;
+        return &instance;
     }
 
+    void stop() { is_stop = true; }
+
+protected:
+    virtual void run();
+
 private:
-    static PulsePalHost *instance;
+    volatile bool is_stop;
 };
 
 #endif // PULSEPALHOST_H

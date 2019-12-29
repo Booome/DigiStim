@@ -1,12 +1,17 @@
 #include "pulsepalhost.h"
-
-PulsePalHost *PulsePalHost::instance = NULL;
+#include <QDebug>
 
 PulsePalHost::PulsePalHost(QObject *parent)
-    : QObject(parent)
+    : QThread(parent)
 {
 }
 
 PulsePalHost::~PulsePalHost()
 {
+}
+
+void PulsePalHost::run()
+{
+    while (!is_stop) {
+    }
 }

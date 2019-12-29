@@ -5,8 +5,6 @@
 #include <QLabel>
 #include "mainview.h"
 
-HomeWindow *HomeWindow::instance = NULL;
-
 HomeWindow::HomeWindow(QWidget *parent)
     : QMainWindow(parent)
     , topBar(new TopBar(this))

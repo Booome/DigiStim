@@ -28,9 +28,8 @@ private:
 
 public:
     static DataBase *getInstance() {
-        if (!instance)
-            instance = new DataBase;
-        return instance;
+        static DataBase instance;
+        return &instance;
     }
 
     Digi::ConnectState_t getConnState() const {

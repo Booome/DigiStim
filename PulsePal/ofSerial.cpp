@@ -200,9 +200,10 @@ void ofSerial::buildDeviceList()
 #endif
 #ifdef TARGET_LINUX
 //    prefixMatch.push_back("ttyS");
-    prefixMatch.push_back("ttyUSB");
+//    prefixMatch.push_back("ttyUSB");
 //    prefixMatch.push_back("rfc");
-    prefixMatch.push_back("ttyA");
+//    prefixMatch.push_back("ttyA");
+    prefixMatch.push_back("ttyACM");
 #endif
 
 
@@ -532,7 +533,6 @@ bool ofSerial::setup(string portName, int baud)
 //----------------------------------------------------------------
 int ofSerial::writeBytes(unsigned char* buffer, int length)
 {
-
     if (!bInited)
     {
         //ofLog(OF_LOG_ERROR,"ofSerial: serial not inited");
@@ -570,7 +570,6 @@ int ofSerial::writeBytes(unsigned char* buffer, int length)
     return 0;
 #endif
     //---------------------------------------------
-
 }
 
 //----------------------------------------------------------------
