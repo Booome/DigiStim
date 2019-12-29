@@ -14,7 +14,7 @@ public:
     void setupUi(const QRect &rect);
 
 private:
-    QLabel *label;
+    QLabel *m_label;
 };
 
 #endif // CROSSHAIR_H

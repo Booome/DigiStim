@@ -31,9 +31,9 @@ private slots:
     void calibrateDone();
 
 private:
-    QSplashScreen   *splash;
-    CalibrateWindow *calibrate_window;
-    QTimer          *calibration_mode_timer;
+    QSplashScreen   *m_splash;
+    CalibrateWindow *m_calibrate_window;
+    QTimer          *m_calibration_mode_timer;
 };
 
 #endif // MYAPPLICATION_H

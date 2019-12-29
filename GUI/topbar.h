@@ -29,12 +29,12 @@ public slots:
     void on_devNameChange(const QString &dev);
 
 private:
-    QLabel      *icon;
-    QLabel      *title;
-    QLabel      *conn_state;
-    QPushButton *dev_name;
-    QPushButton *reset;
-    QPushButton *setting;
+    QLabel      *m_icon;
+    QLabel      *m_title;
+    QLabel      *m_conn_state;
+    QPushButton *m_dev_name;
+    QPushButton *m_reset;
+    QPushButton *m_setting;
 };
 
 #endif // TOPBAR_H

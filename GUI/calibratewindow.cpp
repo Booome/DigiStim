@@ -7,27 +7,27 @@
 
 CalibrateWindow::CalibrateWindow(QWidget *parent)
     : QMainWindow(parent)
-    , title(new QLabel(this))
-    , prompt(new QLabel(this))
-    , thread(new CalibrateThread(this))
-    , crosshairs(new Crosshair[CROSSHAIR_NUM])
+    , m_title(new QLabel(this))
+    , m_prompt(new QLabel(this))
+    , m_thread(new CalibrateThread(this))
+    , m_crosshairs(new Crosshair[CROSSHAIR_NUM])
 {
-    QObject::connect(thread, SIGNAL(isDone()), this, SIGNAL(isDone()));
+    connect(m_thread, SIGNAL(isDone()), this, SIGNAL(isDone()));
 
     for (int i = 0; i < CROSSHAIR_NUM; ++i)
-        crosshairs[i].setParent(this);
+        m_crosshairs[i].setParent(this);
 
-    thread->start();
+    m_thread->start();
 }
 
 CalibrateWindow::~CalibrateWindow()
 {
-    QObject::disconnect(thread, SIGNAL(isDone()), this, SIGNAL(isDone()));
+    disconnect(m_thread, SIGNAL(isDone()), this, SIGNAL(isDone()));
 
-    delete thread;
-    delete[] crosshairs;
-    delete prompt;
-    delete title;
+    delete m_thread;
+    delete[] m_crosshairs;
+    delete m_prompt;
+    delete m_title;
 }
 
 void CalibrateWindow::setupUi(const QRect &rect)
@@ -40,24 +40,24 @@ void CalibrateWindow::setupUi(const QRect &rect)
 
 void CalibrateWindow::setupTitle()
 {
-    title->setText(tr("Touchscreen calibration utility"));
-    title->setStyleSheet("font: 16pt \"Adobe Courier\";");
-    title->adjustSize();
-    title->setGeometry((geometry().width() - title->geometry().width()) / 2,
-                       geometry().height() * 6 / 20 - title->geometry().height() / 2,
-                       title->geometry().width(),
-                       title->geometry().height());
+    m_title->setText(tr("Touchscreen calibration utility"));
+    m_title->setStyleSheet("font: 16pt \"Adobe Courier\";");
+    m_title->adjustSize();
+    m_title->setGeometry((geometry().width() - m_title->geometry().width()) / 2,
+                         geometry().height() * 6 / 20 - m_title->geometry().height() / 2,
+                         m_title->geometry().width(),
+                         m_title->geometry().height());
 }
 
 void CalibrateWindow::setupPrompt()
 {
-    prompt->setText(tr("Touch crosshair to calibrate"));
-    prompt->setStyleSheet("font: 14pt \"Adobe Courier\";");
-    prompt->adjustSize();
-    prompt->setGeometry((geometry().width() - prompt->geometry().width()) / 2,
-                        geometry().height() * 7 / 20 - prompt->geometry().height() / 2,
-                        prompt->geometry().width(),
-                        prompt->geometry().height());
+    m_prompt->setText(tr("Touch crosshair to calibrate"));
+    m_prompt->setStyleSheet("font: 14pt \"Adobe Courier\";");
+    m_prompt->adjustSize();
+    m_prompt->setGeometry((geometry().width() - m_prompt->geometry().width()) / 2,
+                          geometry().height() * 7 / 20 - m_prompt->geometry().height() / 2,
+                          m_prompt->geometry().width(),
+                          m_prompt->geometry().height());
 }
 
 void CalibrateWindow::setupCrosshairs()
@@ -76,7 +76,7 @@ void CalibrateWindow::setupCrosshairs()
     };
 
     for (int i = 0; i < 5; ++i)
-        crosshairs[i].setupUi(geometries[i]);
+        m_crosshairs[i].setupUi(geometries[i]);
 }
 
 void CalibrateWindow::resizeEvent(QResizeEvent *event)

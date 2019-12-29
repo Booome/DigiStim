@@ -2,8 +2,8 @@
 
 DataBase::DataBase(QObject *parent)
     : QObject(parent)
-    , conn_state(Digi::ConnectState_Disconnected)
-    , dev_name(QString("NULL"))
+    , m_conn_state(Digi::ConnectState_Disconnected)
+    , m_dev_name(QString(""))
 {
 }
 

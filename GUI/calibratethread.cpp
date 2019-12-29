@@ -3,25 +3,25 @@
 
 CalibrateThread::CalibrateThread(QObject *parent)
     : QThread(parent)
-    , stopped(false)
+    , m_stopped(false)
 {
 }
 
 void CalibrateThread::stop()
 {
     qDebug() << __FUNCTION__ << __LINE__;
-    stopped = true;
+    m_stopped = true;
 }
 
 CalibrateThread::~CalibrateThread()
 {
-    stopped = true;
+    m_stopped = true;
     wait();
 }
 
 void CalibrateThread::run()
 {
-    while (!stopped) {
+    while (!m_stopped) {
     }
 
     emit isDone();

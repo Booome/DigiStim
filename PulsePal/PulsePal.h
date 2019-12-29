@@ -115,6 +115,7 @@ private:
     uint16_t voltageToInt16(float voltage);
     ofSerial serial;
     uint8_t firmwareVersion;
+    std::string m_portString;
 };
 
 #endif  // __PULSEPAL_H_F2B7B63E__

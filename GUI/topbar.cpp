@@ -6,12 +6,12 @@
 
 TopBar::TopBar(QWidget *parent)
     : MWidget(parent)
-    , icon(new QLabel(this))
-    , title(new QLabel(this))
-    , conn_state(new QLabel(this))
-    , dev_name(new QPushButton(this))
-    , reset(new QPushButton(this))
-    , setting(new QPushButton(this))
+    , m_icon(new QLabel(this))
+    , m_title(new QLabel(this))
+    , m_conn_state(new QLabel(this))
+    , m_dev_name(new QPushButton(this))
+    , m_reset(new QPushButton(this))
+    , m_setting(new QPushButton(this))
 {
     setAttribute(Qt::WA_StyledBackground);
 
@@ -20,16 +20,16 @@ TopBar::TopBar(QWidget *parent)
     if (devices.size())
         DataBase::getInstance()->setDevName(devices[0].getDeviceName().c_str());
 
-    QObject::connect(DataBase::getInstance(), SIGNAL(connStateChanged(Digi::ConnectState_t)),
-                     this, SLOT(on_connStateChange(Digi::ConnectState_t)));
+    connect(DataBase::getInstance(), SIGNAL(connStateChanged(Digi::ConnectState_t)),
+            this, SLOT(on_connStateChange(Digi::ConnectState_t)));
 }
 
 TopBar::~TopBar()
 {
-    delete setting;
-    delete reset;
-    delete title;
-    delete icon;
+    delete m_setting;
+    delete m_reset;
+    delete m_title;
+    delete m_icon;
 }
 
 void TopBar::setupUi(const QRect &rect)
@@ -48,19 +48,19 @@ void TopBar::setupUi(const QRect &rect)
 void TopBar::setupIcon()
 {
     QPixmap pixmap(":/icon.png");
-    icon->setGeometry(0, 0, geometry().height(), geometry().height());
-    icon->setPixmap(pixmap);
-    icon->setAlignment(Qt::AlignCenter);
+    m_icon->setGeometry(0, 0, geometry().height(), geometry().height());
+    m_icon->setPixmap(pixmap);
+    m_icon->setAlignment(Qt::AlignCenter);
 }
 
 void TopBar::setupTitle()
 {
-    title->setGeometry(geometry().height(), 0,
-                       geometry().width() / 2 - geometry().height() * 2,
-                       geometry().height());
-    title->setAlignment(Qt::AlignVCenter);
-    title->setText(tr("Terminal"));
-    title->setStyleSheet("font: 75 26pt \"Adobe Courier\";");
+    m_title->setGeometry(geometry().height(), 0,
+                         geometry().width() / 2 - geometry().height() * 2,
+                         geometry().height());
+    m_title->setAlignment(Qt::AlignVCenter);
+    m_title->setText(tr("Terminal"));
+    m_title->setStyleSheet("font: 75 26pt \"Adobe Courier\";");
 }
 
 void TopBar::setupConnState()
@@ -70,29 +70,32 @@ void TopBar::setupConnState()
 
 void TopBar::setupDevName()
 {
-    on_devNameChange(DataBase::getInstance()->getDevName());
+    if (DataBase::getInstance()->getDevName() == "")
+        on_devNameChange("NULL");
+    else
+        on_devNameChange(DataBase::getInstance()->getDevName());
 }
 
 void TopBar::setupReset()
 {
     QIcon icon(":/reset.png");
-    reset->setGeometry(geometry().width() - geometry().height() * 2.5, 0,
-                       geometry().height(),
-                       geometry().height());
-    reset->setIcon(icon);
-    reset->setIconSize(QSize(geometry().height(), geometry().height()));
-    reset->setStyleSheet(PUSH_BUTTON_STYLE);
+    m_reset->setGeometry(geometry().width() - geometry().height() * 2.5, 0,
+                         geometry().height(),
+                         geometry().height());
+    m_reset->setIcon(icon);
+    m_reset->setIconSize(QSize(geometry().height(), geometry().height()));
+    m_reset->setStyleSheet(PUSH_BUTTON_STYLE);
 }
 
 void TopBar::setupSetting()
 {
     QIcon icon(":/setting.png");
-    setting->setGeometry(geometry().width() - geometry().height(), 0,
-                         geometry().height(),
-                         geometry().height());
-    setting->setIcon(icon);
-    setting->setIconSize(QSize(geometry().height(), geometry().height()));
-    setting->setStyleSheet(PUSH_BUTTON_STYLE);
+    m_setting->setGeometry(geometry().width() - geometry().height(), 0,
+                           geometry().height(),
+                           geometry().height());
+    m_setting->setIcon(icon);
+    m_setting->setIconSize(QSize(geometry().height(), geometry().height()));
+    m_setting->setStyleSheet(PUSH_BUTTON_STYLE);
 }
 
 void TopBar::on_connStateChange(Digi::ConnectState_t _conn_state)
@@ -106,19 +109,19 @@ void TopBar::on_connStateChange(Digi::ConnectState_t _conn_state)
         filename = ":/connected.png";
 
     QPixmap pixmap(filename);
-    conn_state->setGeometry(geometry().width() / 2 - geometry().height(), 0,
-                            geometry().height(), geometry().height());
-    conn_state->setPixmap(pixmap);
-    conn_state->setAlignment(Qt::AlignCenter);
+    m_conn_state->setGeometry(geometry().width() / 2 - geometry().height(), 0,
+                              geometry().height(), geometry().height());
+    m_conn_state->setPixmap(pixmap);
+    m_conn_state->setAlignment(Qt::AlignCenter);
 }
 
 void TopBar::on_devNameChange(const QString &dev)
 {
-    dev_name->setGeometry(geometry().width() / 2, 0,
-                          geometry().width() / 2 - geometry().height() * 2.5,
-                          geometry().height());
-    dev_name->setText(dev);
-    dev_name->setFont(QFont("Adobe Courier", 20));
-    dev_name->setStyleSheet("QPushButton {background-color: #F0F0F0; border-radius: 8px;}"
-                            "QPushButton:pressed {background-color: #C6C6C6; border-radius: 8px;}");
+    m_dev_name->setGeometry(geometry().width() / 2, 0,
+                            geometry().width() / 2 - geometry().height() * 2.5,
+                            geometry().height());
+    m_dev_name->setText(dev);
+    m_dev_name->setFont(QFont("Adobe Courier", 20));
+    m_dev_name->setStyleSheet("QPushButton {background-color: #F0F0F0; border-radius: 8px;}"
+                              "QPushButton:pressed {background-color: #C6C6C6; border-radius: 8px;}");
 }

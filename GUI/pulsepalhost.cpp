@@ -1,17 +1,19 @@
 #include "pulsepalhost.h"
+#include "database.h"
 #include <QDebug>
 
 PulsePalHost::PulsePalHost(QObject *parent)
-    : QThread(parent)
+    : QObject(parent)
+    , m_pulsepal(new PulsePal)
 {
+    connect(DataBase::getInstance(), SIGNAL(devNameChanged(const QString &)),
+            this, SLOT());
 }
 
 PulsePalHost::~PulsePalHost()
 {
 }
 
-void PulsePalHost::run()
+void PulsePalHost::on_devNameChange(const QString &name)
 {
-    while (!is_stop) {
-    }
 }

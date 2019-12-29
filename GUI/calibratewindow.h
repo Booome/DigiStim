@@ -28,10 +28,10 @@ signals:
     void isDone();
 
 private:
-    QLabel          *title;
-    QLabel          *prompt;
-    CalibrateThread *thread;
-    Crosshair       *crosshairs;
+    QLabel          *m_title;
+    QLabel          *m_prompt;
+    CalibrateThread *m_thread;
+    Crosshair       *m_crosshairs;
 };
 
 #endif // CALIBRATEWINDOW_H

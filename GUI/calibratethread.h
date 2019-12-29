@@ -21,7 +21,7 @@ signals:
     void isDone();
 
 private:
-    volatile bool stopped;
+    volatile bool m_stopped;
 };
 
 #endif // CALIBRATETHREAD_H

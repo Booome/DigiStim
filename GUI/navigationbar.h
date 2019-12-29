@@ -15,8 +15,8 @@ public:
     virtual void setupUi(const QRect &rect);
 
 private:
-    QPushButton *home;
-    QPushButton *back;
+    QPushButton *m_home;
+    QPushButton *m_back;
 };
 
 #endif // NAVIGATIONBAR_H

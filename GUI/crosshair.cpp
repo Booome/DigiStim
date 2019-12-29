@@ -3,13 +3,13 @@
 
 Crosshair::Crosshair(QWidget *parent)
     : QWidget(parent)
-    , label(new QLabel(this))
+    , m_label(new QLabel(this))
 {
 }
 
 Crosshair::~Crosshair()
 {
-    delete label;
+    delete m_label;
 }
 
 void Crosshair::setupUi(const QRect &rect)
@@ -30,5 +30,5 @@ void Crosshair::setupUi(const QRect &rect)
                      geometry().width(),
                      geometry().height() / 2);
 
-    label->setPixmap(pixmap);
+    m_label->setPixmap(pixmap);
 }

@@ -34,9 +34,9 @@ private:
     QPushButton *triggers[TRIGGER_BUTTON_NUM];
     QPushButton *channels[CHANNEL_BUTTON_NUM];
 
-    int outter_gaps;
-    int inner_gaps;
-    int button_radius;
+    int m_outter_gaps;
+    int m_inner_gaps;
+    int m_button_radius;
 };
 
 #endif // MAINVIEW_H

@@ -8,14 +8,14 @@ class DataBase : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(Digi::ConnectState_t conn_state
+    Q_PROPERTY(Digi::ConnectState_t m_conn_state
                READ getConnState
                WRITE setConnState
                RESET resetConnState
                NOTIFY connStateChanged
                FINAL)
 
-    Q_PROPERTY(QString dev_name
+    Q_PROPERTY(QString m_dev_name
                READ getDevName
                WRITE setDevName
                RESET resetDevName
@@ -33,12 +33,12 @@ public:
     }
 
     Digi::ConnectState_t getConnState() const {
-        return conn_state;
+        return m_conn_state;
     }
 
     void setConnState(Digi::ConnectState_t state) {
-        conn_state = state;
-        emit connStateChanged(conn_state);
+        m_conn_state = state;
+        emit connStateChanged(m_conn_state);
     }
 
     void resetConnState() {
@@ -46,28 +46,25 @@ public:
     }
 
     const QString &getDevName() const {
-        return dev_name;
+        return m_dev_name;
     }
 
     void setDevName(const QString &dev) {
-        dev_name = dev;
-        emit devNameChanged(dev_name);
+        m_dev_name = dev;
+        emit devNameChanged(m_dev_name);
     }
 
     void resetDevName() {
         setDevName("NULL");
     }
 
-private:
-    static DataBase *instance;
-
 signals:
     void connStateChanged(Digi::ConnectState_t);
     void devNameChanged(const QString &);
 
 private:
-    Digi::ConnectState_t conn_state;
-    QString              dev_name;
+    Digi::ConnectState_t m_conn_state;
+    QString              m_dev_name;
 };
 
 #endif // DATABASE_H

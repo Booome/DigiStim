@@ -2,8 +2,9 @@
 #define PULSEPALHOST_H
 
 #include <QThread>
+#include "PulsePal.h"
 
-class PulsePalHost : public QThread
+class PulsePalHost : public QObject
 {
     Q_OBJECT
 
@@ -17,13 +18,11 @@ public:
         return &instance;
     }
 
-    void stop() { is_stop = true; }
-
-protected:
-    virtual void run();
+public slots:
+    void on_devNameChange(const QString &);
 
 private:
-    volatile bool is_stop;
+    PulsePal *m_pulsepal;
 };
 
 #endif // PULSEPALHOST_H

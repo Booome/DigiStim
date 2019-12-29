@@ -7,17 +7,17 @@
 
 HomeWindow::HomeWindow(QWidget *parent)
     : QMainWindow(parent)
-    , topBar(new TopBar(this))
-    , navigationBar(new NavigationBar(this))
-    , view(new MainView(this))
+    , m_topBar(new TopBar(this))
+    , m_navigationBar(new NavigationBar(this))
+    , m_view(new MainView(this))
 {
 }
 
 HomeWindow::~HomeWindow()
 {
-    delete view;
-    delete navigationBar;
-    delete topBar;
+    delete m_view;
+    delete m_navigationBar;
+    delete m_topBar;
 }
 
 void HomeWindow::setupUi(const QRect &rect)
@@ -25,9 +25,9 @@ void HomeWindow::setupUi(const QRect &rect)
     setGeometry(rect);
 
     MWidget *widgets[] = {
-        topBar,
-        navigationBar,
-        view,
+        m_topBar,
+        m_navigationBar,
+        m_view,
     };
 
     const QRect geometries[] = {

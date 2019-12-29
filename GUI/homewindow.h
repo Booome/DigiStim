@@ -31,9 +31,9 @@ private:
     int geometries_h(int row);
 
 private:
-    TopBar        *topBar;
-    NavigationBar *navigationBar;
-    MWidget       *view;
+    TopBar        *m_topBar;
+    NavigationBar *m_navigationBar;
+    MWidget       *m_view;
 };
 
 #endif // HOMEWINDOW_H

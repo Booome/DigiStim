@@ -4,9 +4,9 @@
 
 MainView::MainView(QWidget *parent)
     : MWidget(parent)
-    , outter_gaps(10)
-    , inner_gaps(5)
-    , button_radius(20)
+    , m_outter_gaps(10)
+    , m_inner_gaps(5)
+    , m_button_radius(20)
 {
     setAttribute(Qt::WA_StyledBackground);
 
@@ -42,8 +42,8 @@ void MainView::setupTriggers()
     };
 
     const QString styles[] = {
-        "QPushButton {background-color: #c6c6c6; border-top-left-radius: " + QString::number(button_radius) + "px; border-top-right-radius:"  + QString::number(button_radius) + "px;}",
-        "QPushButton {background-color: #c6c6c6; border-bottom-left-radius:" + QString::number(button_radius) + "px; border-bottom-right-radius:" + QString::number(button_radius) + "px;}"
+        "QPushButton {background-color: #c6c6c6; border-top-left-radius: " + QString::number(m_button_radius) + "px; border-top-right-radius:"  + QString::number(m_button_radius) + "px;}",
+        "QPushButton {background-color: #c6c6c6; border-bottom-left-radius:" + QString::number(m_button_radius) + "px; border-bottom-right-radius:" + QString::number(m_button_radius) + "px;}"
     };
 
     for (int i = 0; i < TRIGGER_BUTTON_NUM; ++i) {
@@ -63,10 +63,10 @@ void MainView::setupChannels()
     };
 
     const QString styles[] = {
-        "QPushButton {background-color: #c6c6c6; border-top-left-radius: " + QString::number(button_radius) + "px;}",
-        "QPushButton {background-color: #c6c6c6; border-bottom-left-radius: " + QString::number(button_radius) + "px;}",
-        "QPushButton {background-color: #c6c6c6; border-top-right-radius: " + QString::number(button_radius) + "px;}",
-        "QPushButton {background-color: #c6c6c6; border-bottom-right-radius: " + QString::number(button_radius) + "px;}",
+        "QPushButton {background-color: #c6c6c6; border-top-left-radius: " + QString::number(m_button_radius) + "px;}",
+        "QPushButton {background-color: #c6c6c6; border-bottom-left-radius: " + QString::number(m_button_radius) + "px;}",
+        "QPushButton {background-color: #c6c6c6; border-top-right-radius: " + QString::number(m_button_radius) + "px;}",
+        "QPushButton {background-color: #c6c6c6; border-bottom-right-radius: " + QString::number(m_button_radius) + "px;}",
     };
 
     for (int i = 0; i < CHANNEL_BUTTON_NUM; ++i) {
@@ -78,12 +78,12 @@ void MainView::setupChannels()
 
 int MainView::triggerButtonWith()
 {
-    return (geometry().width() - 3 * outter_gaps - inner_gaps) / 5;
+    return (geometry().width() - 3 * m_outter_gaps - m_inner_gaps) / 5;
 }
 
 int MainView::triggerButtonHeight()
 {
-    return (geometry().height() - 2 * outter_gaps - inner_gaps) / 2;
+    return (geometry().height() - 2 * m_outter_gaps - m_inner_gaps) / 2;
 }
 
 int MainView::channelButtonWith()
@@ -100,11 +100,11 @@ int MainView::geometries_x(int cloume)
 {
     switch (cloume) {
     case 0:
-        return outter_gaps;
+        return m_outter_gaps;
     case 1:
-        return geometries_x(0) + triggerButtonWith() + outter_gaps;
+        return geometries_x(0) + triggerButtonWith() + m_outter_gaps;
     case 2:
-        return geometries_x(1) + channelButtonWith() + inner_gaps;
+        return geometries_x(1) + channelButtonWith() + m_inner_gaps;
     default:
         return -1;
     }
@@ -114,9 +114,9 @@ int MainView::geometries_y(int row)
 {
     switch (row) {
     case 0:
-        return outter_gaps;
+        return m_outter_gaps;
     case 1:
-        return geometries_y(0) + triggerButtonHeight() + inner_gaps;
+        return geometries_y(0) + triggerButtonHeight() + m_inner_gaps;
     default:
         return -1;
     }

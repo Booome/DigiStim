@@ -4,26 +4,26 @@
 
 MyApplication::MyApplication(int &argc, char **argv)
     : QApplication(argc, argv)
-    , splash(new QSplashScreen)
-    , calibrate_window(NULL)
-    , calibration_mode_timer(new QTimer(this))
+    , m_splash(new QSplashScreen)
+    , m_calibrate_window(NULL)
+    , m_calibration_mode_timer(new QTimer(this))
 {
-    splash->setPixmap(QPixmap(":/start.png"));
-    splash->show();
+    m_splash->setPixmap(QPixmap(":/start.png"));
+    m_splash->show();
 
     QTimer::singleShot(2500, this, SLOT(splashDone()));
 
-    calibration_mode_timer->setSingleShot(true);
-    calibration_mode_timer->setInterval(5000);
-    connect(calibration_mode_timer, SIGNAL(timeout()), this, SLOT(calibrateModeToggle()));
+    m_calibration_mode_timer->setSingleShot(true);
+    m_calibration_mode_timer->setInterval(5000);
+    connect(m_calibration_mode_timer, SIGNAL(timeout()), this, SLOT(calibrateModeToggle()));
 
     installEventFilter(this);
 }
 
 MyApplication::~MyApplication()
 {
-    delete calibration_mode_timer;
-    delete splash;
+    delete m_calibration_mode_timer;
+    delete m_splash;
 }
 
 bool MyApplication::eventFilter(QObject *watched, QEvent *event)
@@ -34,9 +34,9 @@ bool MyApplication::eventFilter(QObject *watched, QEvent *event)
 
 void MyApplication::splashDone()
 {
-    splash->close();
-    delete splash;
-    splash = nullptr;
+    m_splash->close();
+    delete m_splash;
+    m_splash = nullptr;
 
     HomeWindow *home_window = HomeWindow::getInstance();
     home_window->setupUi(QGuiApplication::primaryScreen()->geometry());
@@ -47,7 +47,7 @@ void MyApplication::calibrateModeToggle()
 {
     qDebug() << __PRETTY_FUNCTION__;
 
-    calibration_mode_timer->stop();
+    m_calibration_mode_timer->stop();
 
     HomeWindow *home_window = HomeWindow::getInstance();
     if (!home_window->isHidden()) {
@@ -64,26 +64,26 @@ void MyApplication::calibrateCheck(QObject *watched, QEvent *event)
     Q_UNUSED(watched);
 
     if (event->type() == QEvent::MouseButtonPress) {
-        calibration_mode_timer->stop();
-        calibration_mode_timer->start();
+        m_calibration_mode_timer->stop();
+        m_calibration_mode_timer->start();
     } else if (event->type() == QEvent::MouseButtonRelease) {
-        calibration_mode_timer->stop();
+        m_calibration_mode_timer->stop();
     }
 }
 
 void MyApplication::enterCalibrateMode()
 {
-    calibrate_window = new CalibrateWindow;
-    QObject::connect(calibrate_window, SIGNAL(isDone()), this, SLOT(calibrateDone()));
-    calibrate_window->setupUi(QGuiApplication::primaryScreen()->geometry());
-    calibrate_window->show();
+    m_calibrate_window = new CalibrateWindow;
+    connect(m_calibrate_window, SIGNAL(isDone()), this, SLOT(calibrateDone()));
+    m_calibrate_window->setupUi(QGuiApplication::primaryScreen()->geometry());
+    m_calibrate_window->show();
 }
 
 void MyApplication::exitCalibrateMode()
 {
-    QObject::disconnect(calibrate_window, SIGNAL(isDone()), this, SLOT(calibrateDone()));
-    delete calibrate_window;
-    calibrate_window = nullptr;
+    disconnect(m_calibrate_window, SIGNAL(isDone()), this, SLOT(calibrateDone()));
+    delete m_calibrate_window;
+    m_calibrate_window = nullptr;
 }
 
 void MyApplication::calibrateDone()
