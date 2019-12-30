@@ -79,7 +79,7 @@ void TopBar::setupDevName()
 void TopBar::setupReset()
 {
     QIcon icon(":/reset.png");
-    m_reset->setGeometry(geometry().width() - geometry().height() * 2.5, 0,
+    m_reset->setGeometry(geometry().width() - geometry().height() * 2.25, 0,
                          geometry().height(),
                          geometry().height());
     m_reset->setIcon(icon);
