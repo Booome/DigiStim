@@ -50,7 +50,6 @@ HEADERS += \
     GUI/style.h \
     GUI/topbar.h \
     PulsePal/PulsePal.h \
-    PulsePal/ofConstants.h \
     PulsePal/ofSerial.h
 
 TRANSLATIONS += \

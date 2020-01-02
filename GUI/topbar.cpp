@@ -15,10 +15,9 @@ TopBar::TopBar(QWidget *parent)
 {
     setAttribute(Qt::WA_StyledBackground);
 
-    ofSerial serial;
-    vector<ofSerialDeviceInfo> devices = serial.getDeviceList();
-    if (devices.size())
-        DataBase::getInstance()->setDevName(devices[0].getDeviceName().c_str());
+    std::vector<std::string> ports = ofSerial::scanPort();
+    if (!ports.empty())
+        DataBase::getInstance()->setDevName(ports[0].c_str());
 
     connect(DataBase::getInstance(), SIGNAL(connStateChanged(Digi::ConnectState_t)),
             this, SLOT(on_connStateChange(Digi::ConnectState_t)));
