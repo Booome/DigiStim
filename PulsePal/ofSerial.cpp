@@ -6,6 +6,8 @@
 
 using namespace std;
 
+#define OFSERIAL_THROW_STRERROR() throw ofSerialBaseError(__FILE__, __LINE__, strerror(errno))
+
 ofSerial::ofSerial()
     : ofSerial("", 115200)
 {
@@ -60,7 +62,7 @@ void ofSerial::open()
 
     m_fd = ::open(m_port.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
     if (m_fd < 0)
-        throw ofSerialBaseError(__FILE__, __LINE__, "open port failed.");
+        OFSERIAL_THROW_STRERROR();
 
     int ret;
     struct termios options;
@@ -68,7 +70,7 @@ void ofSerial::open()
     if (ret == -1) {
         ::close(m_fd);
         m_fd = -1;
-        throw ofSerialBaseError(__FILE__, __LINE__, "tcgetattr failed.");
+        OFSERIAL_THROW_STRERROR();
     }
     options = oldoptions;
 
@@ -80,7 +82,7 @@ void ofSerial::open()
         ::close(m_fd);
         m_fd = -1;
         tcsetattr(m_fd, TCSANOW, &oldoptions);
-        throw ofSerialBaseError(__FILE__, __LINE__, "get speed_t failed.");
+        OFSERIAL_THROW_STRERROR();
     }
 
     ret = cfsetispeed(&options, speed);
@@ -88,14 +90,14 @@ void ofSerial::open()
         ::close(m_fd);
         m_fd = -1;
         tcsetattr(m_fd, TCSANOW, &oldoptions);
-        throw ofSerialBaseError(__FILE__, __LINE__, "cfsetispeed failed.");
+        OFSERIAL_THROW_STRERROR();
     }
     ret = cfsetospeed(&options, speed);
     if (ret == -1) {
         ::close(m_fd);
         m_fd = -1;
         tcsetattr(m_fd, TCSANOW, &oldoptions);
-        throw ofSerialBaseError(__FILE__, __LINE__, "cfsetospeed failed.");
+        OFSERIAL_THROW_STRERROR();
     }
 
     options.c_cflag |= (CLOCAL | CREAD);
@@ -109,7 +111,7 @@ void ofSerial::open()
         ::close(m_fd);
         m_fd = -1;
         tcsetattr(m_fd, TCSANOW, &oldoptions);
-        throw ofSerialBaseError(__FILE__, __LINE__, "tcsetattr failed.");
+        OFSERIAL_THROW_STRERROR();
     }
 }
 
@@ -151,7 +153,7 @@ ssize_t ofSerial::read(void *buf, int length)
     if (errno == EAGAIN)
         return 0;
 
-    throw ofSerialBaseError(__FILE__, __LINE__, strerror(errno));
+    OFSERIAL_THROW_STRERROR();
 }
 
 ssize_t ofSerial::write(const void *buf, int length)
@@ -166,7 +168,7 @@ ssize_t ofSerial::write(const void *buf, int length)
     if (errno == EAGAIN)
         return 0;
 
-    throw ofSerialBaseError(__FILE__, __LINE__, strerror(errno));
+    OFSERIAL_THROW_STRERROR();
 }
 
 ssize_t ofSerial::readBlock(void *buf, int length, unsigned time_ms)
