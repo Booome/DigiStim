@@ -24,6 +24,8 @@ public:
     }
 };
 
+#define OFSERIAL_BLOCK_TIME_MAX         0xffffffff
+
 class ofSerial
 {
 public:
@@ -42,8 +44,8 @@ public:
     ssize_t read(void *buf, int length);
     ssize_t write(const void *buf, int length);
 
-    void readBlock(void *buf, int length);
-    void writeBlock(const void *buf, int length);
+    ssize_t readBlock(void *buf, int length, unsigned time_ms = OFSERIAL_BLOCK_TIME_MAX);
+    ssize_t writeBlock(const void *buf, int length, unsigned time_ms = OFSERIAL_BLOCK_TIME_MAX);
 
 public:
     static std::vector<std::string> scanPort();

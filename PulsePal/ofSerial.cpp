@@ -169,24 +169,36 @@ ssize_t ofSerial::write(const void *buf, int length)
     throw ofSerialBaseError(__FILE__, __LINE__, strerror(errno));
 }
 
-void ofSerial::readBlock(void *buf, int length)
+ssize_t ofSerial::readBlock(void *buf, int length, unsigned time_ms)
 {
-    int num = 0;
+    ssize_t num = 0;
 
     while (num < length) {
         num += read((uint8_t *)buf + num, length - num);
+        if (!time_ms)
+            break;
+        else if (time_ms != OFSERIAL_BLOCK_TIME_MAX)
+            --time_ms;
         usleep(1000);
     }
+
+    return num;
 }
 
-void ofSerial::writeBlock(const void *buf, int length)
+ssize_t ofSerial::writeBlock(const void *buf, int length, unsigned time_ms)
 {
-    int num = 0;
+    ssize_t num = 0;
 
     while (num < length) {
         num += write((uint8_t *)buf + num, length - num);
+        if (!time_ms)
+            break;
+        else if (time_ms != OFSERIAL_BLOCK_TIME_MAX)
+            --time_ms;
         usleep(1000);
     }
+
+    return num;
 }
 
 vector<string> ofSerial::scanPort()
