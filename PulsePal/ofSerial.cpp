@@ -6,6 +6,7 @@
 
 using namespace std;
 
+#define OFSERIAL_THROW_STR(str) throw ofSerialBaseError(__FILE__, __LINE__, str)
 #define OFSERIAL_THROW_STRERROR() throw ofSerialBaseError(__FILE__, __LINE__, strerror(errno))
 
 ofSerial::ofSerial()
@@ -128,7 +129,7 @@ void ofSerial::close() noexcept
 void ofSerial::setPort(const std::string &port)
 {
     if (opened())
-        throw ofSerialBaseError(__FILE__, __LINE__, "close port first.");
+        OFSERIAL_THROW_STR("close port first.");
 
     m_port = port;
 }
@@ -136,7 +137,7 @@ void ofSerial::setPort(const std::string &port)
 void ofSerial::setBaud(int baud)
 {
     if (opened())
-        throw ofSerialBaseError(__FILE__, __LINE__, "close port first.");
+        OFSERIAL_THROW_STR("close port first.");
 
     m_baud = baud;
 }
@@ -144,7 +145,7 @@ void ofSerial::setBaud(int baud)
 ssize_t ofSerial::read(void *buf, int length)
 {
     if (!opened())
-        throw ofSerialBaseError(__FILE__, __LINE__, "open port first.");
+        OFSERIAL_THROW_STR("open port first.");
 
     ssize_t ret = ::read(m_fd, buf, length);
     if (ret != -1)
@@ -159,7 +160,7 @@ ssize_t ofSerial::read(void *buf, int length)
 ssize_t ofSerial::write(const void *buf, int length)
 {
     if (!opened())
-        throw ofSerialBaseError(__FILE__, __LINE__, "open port first.");
+        OFSERIAL_THROW_STR("open port first.");
 
     ssize_t ret = ::write(m_fd, buf, length);
     if (ret != -1)
