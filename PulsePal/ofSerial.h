@@ -12,15 +12,19 @@ class ofSerialBaseError: public std::exception
 private:
     std::string m_file;
     unsigned m_line;
-    const std::string m_msg;
+    std::string m_msg;
+    std::string m_full_msg;
 
 public:
     ofSerialBaseError(const std::string &file, unsigned line, const std::string &msg)
-        : m_file(file), m_line(line), m_msg(msg) {}
+        : m_file(file), m_line(line), m_msg(msg)
+    {
+        m_full_msg = m_file + " " + std::to_string(m_line) + ": " + m_msg;
+    }
 
     const char* what() const noexcept
     {
-        return (m_file + " " + std::to_string(m_line) + ": " + m_msg).c_str();
+        return m_full_msg.c_str();
     }
 };
 

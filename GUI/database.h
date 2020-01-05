@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "diginamespace.h"
+#include <QDebug>
 
 class DataBase : public QObject
 {
@@ -50,12 +51,14 @@ public:
     }
 
     void setDevName(const QString &dev) {
-        m_dev_name = dev;
-        emit devNameChanged(m_dev_name);
+        if (m_dev_name != dev) {
+            m_dev_name = dev;
+            emit devNameChanged(m_dev_name);
+        }
     }
 
     void resetDevName() {
-        setDevName("NULL");
+        setDevName("");
     }
 
 signals:

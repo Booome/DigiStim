@@ -107,6 +107,8 @@ void ofSerial::open()
     options.c_cflag &= ~CSIZE;
     options.c_cflag |= CS8;
 
+    cfmakeraw(&options);
+
     ret = tcsetattr(m_fd, TCSANOW, &options);
     if (ret == -1) {
         ::close(m_fd);

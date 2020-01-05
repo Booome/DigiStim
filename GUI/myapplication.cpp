@@ -1,4 +1,5 @@
 #include "myapplication.h"
+#include "pulsepalhost.h"
 #include <QDebug>
 #include <QScreen>
 
@@ -12,6 +13,8 @@ MyApplication::MyApplication(int &argc, char **argv)
     m_splash->show();
 
     QTimer::singleShot(2500, this, SLOT(splashDone()));
+
+    PulsePalHost::getInstance();
 
     m_calibration_mode_timer->setSingleShot(true);
     m_calibration_mode_timer->setInterval(5000);
