@@ -1,6 +1,8 @@
 #ifndef DIGINAMESPACE_H
 #define DIGINAMESPACE_H
 
+#include <QMetaType>
+
 namespace Digi {
 
 enum ConnectState_t {
@@ -10,5 +12,7 @@ enum ConnectState_t {
 };
 
 }
+
+Q_DECLARE_METATYPE(Digi::ConnectState_t)
 
 #endif // DIGINAMESPACE_H
