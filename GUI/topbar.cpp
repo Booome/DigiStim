@@ -12,15 +12,18 @@ TopBar::TopBar(QWidget *parent)
     , m_dev_name(new QPushButton(this))
     , m_reset(new QPushButton(this))
     , m_setting(new QPushButton(this))
+    , m_port_scan_timer(new QTimer(this))
 {
     setAttribute(Qt::WA_StyledBackground);
 
-    std::vector<std::string> ports = ofSerial::scanPort();
-    if (!ports.empty())
-        DataBase::getInstance()->setDevName(ports[0].c_str());
-
     connect(DataBase::getInstance(), SIGNAL(connStateChanged(Digi::ConnectState_t)),
             this, SLOT(on_connStateChange(Digi::ConnectState_t)));
+
+    connect(DataBase::getInstance(), SIGNAL(devNameChanged(const QString &)),
+            this, SLOT(on_devNameChange(const QString &)));
+
+    connect(m_port_scan_timer, SIGNAL(timeout()), this, SLOT(on_portScan()));
+    m_port_scan_timer->start(1000);
 }
 
 TopBar::~TopBar()
@@ -69,10 +72,7 @@ void TopBar::setupConnState()
 
 void TopBar::setupDevName()
 {
-    if (DataBase::getInstance()->getDevName() == "")
-        on_devNameChange("NULL");
-    else
-        on_devNameChange(DataBase::getInstance()->getDevName());
+    on_devNameChange(DataBase::getInstance()->getDevName());
 }
 
 void TopBar::setupReset()
@@ -97,6 +97,15 @@ void TopBar::setupSetting()
     m_setting->setStyleSheet(PUSH_BUTTON_STYLE);
 }
 
+void TopBar::on_portScan()
+{
+    std::vector<std::string> ports = ofSerial::scanPort();
+    if (!ports.empty())
+        DataBase::getInstance()->setDevName(ports[0].c_str());
+    else
+        DataBase::getInstance()->setDevName("");
+}
+
 void TopBar::on_connStateChange(Digi::ConnectState_t _conn_state)
 {
     QString filename;
@@ -119,7 +128,10 @@ void TopBar::on_devNameChange(const QString &dev)
     m_dev_name->setGeometry(geometry().width() / 2, 0,
                             geometry().width() / 2 - geometry().height() * 2.5,
                             geometry().height());
-    m_dev_name->setText(dev);
+    if (dev == "")
+        m_dev_name->setText("NULL");
+    else
+        m_dev_name->setText(dev);
     m_dev_name->setFont(QFont("Adobe Courier", 20));
     m_dev_name->setStyleSheet("QPushButton {background-color: #F0F0F0; border-radius: 8px;}"
                               "QPushButton:pressed {background-color: #C6C6C6; border-radius: 8px;}");
