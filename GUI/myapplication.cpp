@@ -2,10 +2,12 @@
 #include "pulsepalhost.h"
 #include <QDebug>
 #include <QScreen>
+#include "database.h"
 
 MyApplication::MyApplication(int &argc, char **argv)
     : QApplication(argc, argv)
     , m_splash(new QSplashScreen)
+    , m_pulsepale_thread(new QThread)
     , m_calibrate_window(NULL)
     , m_calibration_mode_timer(new QTimer(this))
 {
@@ -14,7 +16,11 @@ MyApplication::MyApplication(int &argc, char **argv)
 
     QTimer::singleShot(2500, this, SLOT(splashDone()));
 
-    PulsePalHost::getInstance();
+    DataBase::getInstance();
+
+    PulsePalHost::getInstance()->moveToThread(m_pulsepale_thread);
+    connect(m_pulsepale_thread, SIGNAL(finished()), PulsePalHost::getInstance(), SLOT(deleteLater()));
+    m_pulsepale_thread->start();
 
     m_calibration_mode_timer->setSingleShot(true);
     m_calibration_mode_timer->setInterval(5000);
@@ -26,6 +32,7 @@ MyApplication::MyApplication(int &argc, char **argv)
 MyApplication::~MyApplication()
 {
     delete m_calibration_mode_timer;
+    delete m_pulsepale_thread;
     delete m_splash;
 }
 

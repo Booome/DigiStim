@@ -3,6 +3,7 @@
 
 #include <QThread>
 #include "PulsePal.h"
+#include <QTimer>
 
 class PulsePalHost : public QObject
 {
@@ -23,6 +24,7 @@ public slots:
 
 private:
     PulsePal *m_pulsepal;
+    QTimer   m_reconect_timer;
 };
 
 #endif // PULSEPALHOST_H
