@@ -38,16 +38,16 @@ public:
     void disconnect();
     bool connected() const noexcept;
 
-    uint32_t getFirmwareVersion() const noexcept;
+    uint32_t getFirmwareVersion();
 
 private:
     uint32_t makeUint32(void *start);
 
 private:
-    uint32_t m_firmware_version;
+    bool m_connected;
 
 private:
-    ofSerial serial;
+    ofSerial m_serial;
 };
 
 #endif // _PULSEPAL_H_

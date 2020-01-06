@@ -7,7 +7,6 @@ using namespace std;
 #define PULSEPAL_THROW_STRERROR() throw PulsePalBaseError(__FILE__, __LINE__, strerror(errno))
 
 PulsePal::PulsePal()
-    : m_firmware_version(PULSEPAL_FIRMWARE_VERSION_INVALID)
 {
 }
 
@@ -17,51 +16,51 @@ PulsePal::~PulsePal()
 
 void PulsePal::connect(const std::string &port)
 {
-    try {
-        if (serial.opened())
-            serial.close();
+    if (m_serial.opened())
+        m_serial.close();
 
-        serial.setPort(port);
-        serial.setBaud(9600);
+    m_serial.setPort(port);
+    m_serial.setBaud(9600);
+    m_serial.open();
 
-        serial.open();
+    getFirmwareVersion();
 
-        uint8_t handshake[2] = {213, 72};
-        uint8_t response[5] = {};
-
-        ssize_t ret = serial.writeBlock(handshake, sizeof(handshake), 100);
-        if (ret != sizeof(handshake))
-            PULSEPAL_THROW_STR("response time out.");
-
-        ret = serial.readBlock(response, sizeof(response), 1000);
-        if (ret != sizeof(response))
-            PULSEPAL_THROW_STR("response time out.");
-
-        if (response[0] != 75)
-            PULSEPAL_THROW_STR("handshake[0] not correct.");
-
-        m_firmware_version = makeUint32(&response[1]);
-        if (m_firmware_version >= 40)
-            PULSEPAL_THROW_STR("firmware version error.");
-    } catch (ofSerialBaseError &e) {
-        PULSEPAL_THROW_STR("serial error.");
-    }
+    m_connected = true;
 }
 
 void PulsePal::disconnect()
 {
-    serial.close();
-    m_firmware_version = PULSEPAL_FIRMWARE_VERSION_INVALID;
+    m_connected = false;
+    m_serial.close();
 }
 
 bool PulsePal::connected() const noexcept
 {
-    return m_firmware_version != PULSEPAL_FIRMWARE_VERSION_INVALID;
+    return m_connected;
 }
 
-uint32_t PulsePal::getFirmwareVersion() const noexcept
+uint32_t PulsePal::getFirmwareVersion()
 {
-    return m_firmware_version;
+    uint32_t firmware_version;
+    uint8_t handshake[2] = {213, 72};
+    uint8_t response[5] = {};
+
+    ssize_t ret = m_serial.writeBlock(handshake, sizeof(handshake), 100);
+    if (ret != sizeof(handshake))
+        PULSEPAL_THROW_STR("response time out.");
+
+    ret = m_serial.readBlock(response, sizeof(response), 1000);
+    if (ret != sizeof(response))
+        PULSEPAL_THROW_STR("response time out.");
+
+    if (response[0] != 75)
+        PULSEPAL_THROW_STR("handshake[0] not correct.");
+
+    firmware_version = makeUint32(&response[1]);
+    if (firmware_version >= 40)
+        PULSEPAL_THROW_STR("firmware version error.");
+
+    return firmware_version;
 }
 
 uint32_t PulsePal::makeUint32(void *start)

@@ -19,12 +19,20 @@ public:
         return &instance;
     }
 
+private:
+    void deviceConnect();
+    void deviceDisconnect();
+    void doHeartbeat();
+
 public slots:
-    void on_devNameChange(const QString &);
+    void on_heartbeat();
 
 private:
     PulsePal *m_pulsepal;
-    QTimer   m_reconect_timer;
+    QTimer   *m_heatbeat_timer;
+
+private:
+    QString  m_dev_name;
 };
 
 #endif // PULSEPALHOST_H
